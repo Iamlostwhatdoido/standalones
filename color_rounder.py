@@ -1,28 +1,36 @@
 """
-Rounds color in the 16*16*16 RGB cube (maybe do that with Lab ?)
+Jolan ARNAUD
+Executable with input/output in terminal
+Rounds hex RGB colors in a 17*17*17 RGB cube 
+hexcode will be thus simplified to a #aabbcc format
+(maybe do that with Lab too ?)
 """
 
-def ColorConv(s):
-    R = int(s,16)
-    if R%17 > 8:
-        R+=8
-    R = hex(R//17 * 17)
-    
-    
-    if R == "0x0":
-        R = "0x00"
+import os
 
-    return R[2]+R[3]
+clear = lambda: os.system('cls')
+
+
+def channel_rounder(hex_channel:str) -> str:
+
+    int_channel = int(hex_channel,16) + 8
+
+    rounded_hex_channel = hex(int_channel//17 * 17)[2:]
     
-def Convert():
-    color =  []
-    while len(color)!=6 :
-        color = input(" Couleur : ")
+    if rounded_hex_channel == "0": rounded_hex_channel = "00"
+    return rounded_hex_channel
+    
+def convert():
+    clear()
+    color = input(" Couleur : ")
+    if color[0] == "#" : color = color[1:]
+
     print("Résultat :",
-          ColorConv( color[0]+color[1] )+
-          ColorConv( color[2]+color[3] )+
-          ColorConv( color[4]+color[5] ),
+          "#"+
+          channel_rounder( color[:2] )+
+          channel_rounder( color[2:4] )+
+          channel_rounder( color[4:] ),
           "\n"
           )
 
-Convert()
+convert()
