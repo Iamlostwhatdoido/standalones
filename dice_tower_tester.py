@@ -16,12 +16,19 @@ dice_size = int(input("Dice size : "))
 
 result_matrix = np.zeros((dice_size,dice_size),int)
 
-tries = 200
+tries = int(input("Number of tries (0 means it will keep going until "" is inputted) : "))
+if tries == 0 : tries = -1
 previous_rolls = 1
+print("Start with face '1' up")
 
-for i in range(tries):
-	result = int(input('('+str(i)+") result : "))
-	result_matrix[previous_rolls-1,result-1] +=1
-	previous_rolls = result
+i=1
+while tries != 0:
+	result = input('('+str(i)+") result : ")
+	if result == "" : break
+	result_matrix[previous_rolls-1,int(result)-1] +=1
+	previous_rolls = int(result)
+
+	i+=1
+	tries -=1
 
 print(result_matrix)
