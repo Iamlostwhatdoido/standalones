@@ -14,14 +14,14 @@ import numpy as np
 
 dice_size = int(input("Dice size : "))
 
-mat = np.zeros((dice_size,dice_size),int)
+result_matrix = np.zeros((dice_size,dice_size),int)
 
 tries = 200
-previous = 1
+previous_rolls = 1
 
 for i in range(tries):
 	result = int(input('('+str(i)+") result : "))
-	mat[previous-1,result-1] +=1
-	previous = result
+	result_matrix[previous_rolls-1,result-1] +=1
+	previous_rolls = result
 
-print(mat)
+print(result_matrix)
